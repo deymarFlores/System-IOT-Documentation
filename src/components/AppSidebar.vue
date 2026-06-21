@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { navItems, navGroupOrder, navGroupLabels, vpsNavItems } from '../data/nav.js'
 import { stateMap } from '../composables/useProtocols.js'
@@ -34,13 +34,17 @@ const navGroups = computed(() => {
   return allGroups
 })
 
-// Groups start collapsed; sections within a group also start collapsed
 const expandedGroups = ref(
   navGroupOrder.reduce((acc, g) => ({ ...acc, [g]: true }), {})
 )
 const expanded = ref(
   navItems.reduce((acc, s) => ({ ...acc, [s.id]: false }), {})
 )
+
+watch(topSection, (mode) => {
+  const open = mode === 'protocols'
+  navItems.forEach(s => { expanded.value[s.id] = open })
+}, { immediate: true })
 
 function toggleGroup(id)   { expandedGroups.value[id] = !expandedGroups.value[id] }
 function toggleSection(id) { expanded.value[id] = !expanded.value[id] }
