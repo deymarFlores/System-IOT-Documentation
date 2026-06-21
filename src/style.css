@@ -365,7 +365,7 @@ td {
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: #f8fafc; }
 
-tr.step-done td { border-left: 3px solid #16a34a; opacity: 0.65; }
+tr.step-done td { background: #dcfce7; }
 
 .cell-code {
   font-family: var(--font-mono);

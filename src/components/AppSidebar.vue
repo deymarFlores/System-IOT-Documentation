@@ -18,15 +18,20 @@ const topSection = computed(() => {
 })
 
 // Sections grouped and ordered by navGroupOrder
-const navGroups = computed(() =>
-  navGroupOrder
+const navGroups = computed(() => {
+  const allGroups = navGroupOrder
     .map(gid => ({
       id: gid,
       label: navGroupLabels[gid],
       sections: navItems.filter(s => s.group === gid),
     }))
     .filter(g => g.sections.length > 0)
-)
+
+  if (topSection.value === 'protocols') {
+    return allGroups.filter(g => g.id === 'funcionalidades')
+  }
+  return allGroups
+})
 
 // Groups start collapsed; sections within a group also start collapsed
 const expandedGroups = ref(

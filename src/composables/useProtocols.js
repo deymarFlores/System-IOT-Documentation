@@ -1,4 +1,4 @@
-import { ref, computed, watch, isRef } from 'vue'
+import { ref, computed, isRef } from 'vue'
 
 const STORAGE_KEY = 'ecofresh-protocols'
 
@@ -7,30 +7,28 @@ function loadAll() {
   catch { return {} }
 }
 
+const allState = ref(loadAll())
+
 export function useProtocols(featureIdInput) {
   const getId = () => isRef(featureIdInput) ? featureIdInput.value : featureIdInput
 
-  const state = ref(loadAll()[getId()] || {})
-
-  watch(() => getId(), (newId) => {
-    state.value = loadAll()[newId] || {}
-  })
+  const state = computed(() => allState.value[getId()] || {})
 
   function toggle(stepNum) {
     const id = getId()
-    const all = loadAll()
+    const all = { ...allState.value }
     if (!all[id]) all[id] = {}
-    all[id][stepNum] = !all[id][stepNum]
+    all[id] = { ...all[id], [stepNum]: !all[id][stepNum] }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
-    state.value = { ...all[id] }
+    allState.value = all
   }
 
   function reset() {
     const id = getId()
-    const all = loadAll()
+    const all = { ...allState.value }
     delete all[id]
     localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
-    state.value = {}
+    allState.value = all
   }
 
   const completedCount = computed(() => Object.values(state.value).filter(Boolean).length)
