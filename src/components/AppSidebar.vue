@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { navItems, navGroupOrder, navGroupLabels, vpsNavItems } from '../data/nav.js'
+import { stateMap } from '../composables/useProtocols.js'
 import { collections } from '../data/database.js'
 
 defineProps({
@@ -56,10 +57,8 @@ function isFeatureActive(section, feature) {
 }
 
 function getProgress(section, feature) {
-  try {
-    const all = JSON.parse(localStorage.getItem('ecofresh-protocols') || '{}')
-    return Object.values(all[`${section}-${feature}`] || {}).filter(Boolean).length
-  } catch { return 0 }
+  const id = `${section}-${feature}`
+  return Object.values(stateMap.value[id] || {}).filter(Boolean).length
 }
 </script>
 

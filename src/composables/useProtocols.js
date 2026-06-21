@@ -2,7 +2,7 @@ import { ref, computed, isRef, watch } from 'vue'
 import { doc, onSnapshot, setDoc, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase.js'
 
-const stateMap = ref({})
+export const stateMap = ref({})
 const listeners = {}
 
 function ensureListener(id) {
