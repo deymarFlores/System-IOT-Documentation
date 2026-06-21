@@ -1,4 +1,4 @@
-export const usersCrud = {
+﻿export const usersCrud = {
   id: 'users-crud',
   title: 'CRUD de Usuarios',
   module: 'Usuarios',
@@ -7,7 +7,7 @@ export const usersCrud = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/users',
+      endpoint: '/IotSystem/v1.0.1/users',
       description: 'Obtener lista de todos los usuarios (solo admin)',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "users": [{"id": "...", "UserName": "...", "email": "...", "rol": "admin", "status": true}]}',
@@ -16,7 +16,7 @@ export const usersCrud = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/user/{id}',
+      endpoint: '/IotSystem/v1.0.1/user/{id}',
       description: 'Obtener datos de un usuario especifico',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"user": {"id": "64abc...", "UserName": "Juan Perez", "email": "juan@email.com", "rol": "avanzado", "status": true}}',
@@ -25,7 +25,7 @@ export const usersCrud = {
     {
       num: 3,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/auth/me',
+      endpoint: '/IotSystem/v1.0.1/auth/me',
       description: 'Obtener perfil del usuario autenticado',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"user": {"id": "...", "email": "usuario@email.com", "rol": "admin"}}',
@@ -34,7 +34,7 @@ export const usersCrud = {
     {
       num: 4,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/user/register',
+      endpoint: '/IotSystem/v1.0.1/user/register',
       description: 'Registro de nuevo usuario (auto-registro)',
       payload: '{"UserName": "Juan Perez", "email": "juan@email.com", "password": "MiPassword123!"}',
       response: 'HTTP 200\n{"success": true, "user": {"id": "...", "UserName": "Juan Perez", "email": "juan@email.com"}}',
@@ -43,7 +43,7 @@ export const usersCrud = {
     {
       num: 5,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/user/create-user',
+      endpoint: '/IotSystem/v1.0.1/user/create-user',
       description: 'Crear usuario con rol especifico (solo admin)',
       payload: '{"UserName": "Ana Lopez", "email": "ana@email.com", "password": "Pass123!", "rol": "avanzado", "status": true}',
       response: 'HTTP 201\n{"success": true, "user": {"id": "...", "UserName": "Ana Lopez"}}',
@@ -52,7 +52,7 @@ export const usersCrud = {
     {
       num: 6,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/user/{id}',
+      endpoint: '/IotSystem/v1.0.1/user/{id}',
       description: 'Actualizar datos de un usuario',
       payload: '{"UserName": "Juan Perez Updated", "status": true}',
       response: 'HTTP 200\n{"success": true, "user": {"id": "...", "UserName": "Juan Perez Updated"}}',
@@ -61,7 +61,7 @@ export const usersCrud = {
     {
       num: 7,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/user/{id}/change-password',
+      endpoint: '/IotSystem/v1.0.1/user/{id}/change-password',
       description: 'Cambiar contrasena de usuario',
       payload: '{"current_password": "Actual123!", "new_password": "Nuevo456!"}',
       response: 'HTTP 200\n{"success": true, "message": "Contrasena actualizada exitosamente"}',
@@ -70,7 +70,7 @@ export const usersCrud = {
     {
       num: 8,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/user/{id}',
+      endpoint: '/IotSystem/v1.0.1/user/{id}',
       description: 'Eliminar usuario del sistema (solo admin)',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "message": "Usuario eliminado"}',
@@ -102,3 +102,4 @@ export const usersErrors = {
   notes: [],
   diagram: null,
 }
+

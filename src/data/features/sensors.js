@@ -1,4 +1,4 @@
-export const sensorsCrud = {
+﻿export const sensorsCrud = {
   id: 'sensors-crud',
   title: 'CRUD de Sensores',
   module: 'Sensores',
@@ -7,7 +7,7 @@ export const sensorsCrud = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensors',
+      endpoint: '/IotSystem/v1.0.1/sensors',
       description: 'Obtener lista de todos los sensores',
       payload: `Authorization: Bearer {access_token}`,
       response: `HTTP 200
@@ -26,7 +26,7 @@ export const sensorsCrud = {
     {
       num: 3,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensor/{id}',
+      endpoint: '/IotSystem/v1.0.1/sensor/{id}',
       description: 'Obtener datos de un sensor especifico',
       payload: `Authorization: Bearer {access_token}`,
       response: `HTTP 200
@@ -36,7 +36,7 @@ export const sensorsCrud = {
     {
       num: 4,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/sensor',
+      endpoint: '/IotSystem/v1.0.1/sensor',
       description: 'Crear nuevo sensor (lifecycleState: pending hasta confirmacion hardware)',
       payload: `{"name": "Temperatura PLC", "units": "C", "config": {"signalMin": 4, "signalMax": 20, "resolMin": 0, "resolMax": 27648, "rangeMin": -20, "rangeMax": 80}}`,
       response: `HTTP 201
@@ -46,7 +46,7 @@ export const sensorsCrud = {
     {
       num: 5,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/sensor/{id}',
+      endpoint: '/IotSystem/v1.0.1/sensor/{id}',
       description: 'Actualizar configuracion de un sensor',
       payload: `{"name": "Temperatura Updated", "config": {"rangeMin": -10, "rangeMax": 100}}`,
       response: `HTTP 200
@@ -56,7 +56,7 @@ export const sensorsCrud = {
     {
       num: 6,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/sensor/{id}/assign-group',
+      endpoint: '/IotSystem/v1.0.1/sensor/{id}/assign-group',
       description: 'Asignar sensor a un grupo',
       payload: `{"group_id": "64def..."}`,
       response: `HTTP 200
@@ -66,7 +66,7 @@ export const sensorsCrud = {
     {
       num: 7,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/sensor/{id}',
+      endpoint: '/IotSystem/v1.0.1/sensor/{id}',
       description: 'Eliminar sensor del sistema',
       payload: `Authorization: Bearer {access_token}`,
       response: `HTTP 200
@@ -91,7 +91,7 @@ export const sensorsGroups = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensor-groups',
+      endpoint: '/IotSystem/v1.0.1/sensor-groups',
       description: 'Obtener todos los grupos de sensores',
       payload: `Authorization: Bearer {access_token}`,
       response: `HTTP 200
@@ -101,7 +101,7 @@ export const sensorsGroups = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensor-group/{id}',
+      endpoint: '/IotSystem/v1.0.1/sensor-group/{id}',
       description: 'Obtener grupo especifico con sus sensores',
       payload: `Authorization: Bearer {access_token}`,
       response: `HTTP 200
@@ -111,7 +111,7 @@ export const sensorsGroups = {
     {
       num: 3,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/sensor-group',
+      endpoint: '/IotSystem/v1.0.1/sensor-group',
       description: 'Crear nuevo grupo de sensores',
       payload: `{"name": "Zona Norte", "color": "#3b82f6"}`,
       response: `HTTP 201
@@ -121,7 +121,7 @@ export const sensorsGroups = {
     {
       num: 4,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/sensor-group/{id}',
+      endpoint: '/IotSystem/v1.0.1/sensor-group/{id}',
       description: 'Actualizar nombre o color del grupo',
       payload: `{"name": "Zona Norte Updated", "color": "#ef4444"}`,
       response: `HTTP 200
@@ -131,7 +131,7 @@ export const sensorsGroups = {
     {
       num: 5,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/sensor-group/{id}/add-sensor',
+      endpoint: '/IotSystem/v1.0.1/sensor-group/{id}/add-sensor',
       description: 'Agregar sensor al grupo',
       payload: `{"sensor_id": "64abc..."}`,
       response: `HTTP 200
@@ -141,7 +141,7 @@ export const sensorsGroups = {
     {
       num: 6,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/sensor-group/{id}/remove-sensor',
+      endpoint: '/IotSystem/v1.0.1/sensor-group/{id}/remove-sensor',
       description: 'Remover sensor del grupo',
       payload: `{"sensor_id": "64abc..."}`,
       response: `HTTP 200
@@ -151,7 +151,7 @@ export const sensorsGroups = {
     {
       num: 7,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/sensor-group/{id}/reorder',
+      endpoint: '/IotSystem/v1.0.1/sensor-group/{id}/reorder',
       description: 'Reordenar sensores en el grupo',
       payload: `{"sensor_ids": ["id1", "id2", "id3"]}`,
       response: `HTTP 200
@@ -161,7 +161,7 @@ export const sensorsGroups = {
     {
       num: 8,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/sensor-group/{id}',
+      endpoint: '/IotSystem/v1.0.1/sensor-group/{id}',
       description: 'Eliminar grupo (los sensores no se eliminan)',
       payload: `Authorization: Bearer {access_token}`,
       response: `HTTP 200
@@ -197,3 +197,4 @@ export const sensorsErrors = {
   ],
   diagram: null,
 }
+

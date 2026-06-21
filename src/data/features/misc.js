@@ -1,4 +1,4 @@
-export const historyFeature = {
+﻿export const historyFeature = {
   id: 'history-history',
   title: 'Historial de Sensores',
   module: 'Historial',
@@ -7,7 +7,7 @@ export const historyFeature = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensors/{sensorId}/history?start=...&end=...',
+      endpoint: '/IotSystem/v1.0.1/sensors/{sensorId}/history?start=...&end=...',
       description: 'Frontend solicita historial con rango de fechas ISO 8601',
       payload: 'Authorization: Bearer {access_token}\nQuery: start=2026-06-01T00:00:00Z\n&end=2026-06-20T23:59:59Z',
       response: 'HTTP 200\n{"success": true, "sensor_id": "64cde...", "history": {"points": [{"timestamp": "2026-06-01T08:00:00Z", "value": 23.5}, {"timestamp": "2026-06-01T08:05:00Z", "value": 23.8}]}}',
@@ -16,7 +16,7 @@ export const historyFeature = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensors/{sensorId}/history',
+      endpoint: '/IotSystem/v1.0.1/sensors/{sensorId}/history',
       description: 'Backend consulta MongoDB y devuelve los puntos del rango solicitado',
       payload: '-- (recibe query params de arriba)',
       response: 'HTTP 200\n{"success": true, "sensor_id": "...", "history": {"points": [...]}}',
@@ -44,7 +44,7 @@ export const overviewFeature = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/overview',
+      endpoint: '/IotSystem/v1.0.1/overview',
       description: 'Al montar OverviewDashboardView.vue, se solicita el resumen completo del sistema',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "overview": {"sensor_groups": [{"id": "...", "name": "Tanque Principal", "color": "#3b82f6", "sensors": [{"id": "...", "name": "Temperatura", "units": "C", "lifecycleState": "active", "lastValue": 24.5}]}], "actuator_groups": [{"id": "...", "name": "Valvulas", "actuators": [{"id": "...", "name": "Valvula Entrada", "lifecycleState": "active", "currentState": false}]}]}}',
@@ -53,7 +53,7 @@ export const overviewFeature = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/overview',
+      endpoint: '/IotSystem/v1.0.1/overview',
       description: 'Backend consolida MongoDB: sensores, actuadores y sus grupos en un solo documento',
       payload: '-- (recibe Authorization header)',
       response: 'HTTP 200\n{"success": true, "overview": {...}}',
@@ -73,14 +73,14 @@ export const overviewFeature = {
 
 export const websocketRealtime = {
   id: 'websocket-realtime',
-  title: 'WebSocket — Tiempo Real',
+  title: 'WebSocket â€” Tiempo Real',
   module: 'WebSocket',
   description: 'Conexion persistente para recibir telemetria de sensores, estados de actuadores y notificaciones en tiempo real sin polling HTTP.',
   steps: [
     {
       num: 1,
       method: null,
-      endpoint: 'wss://monitoreohidro.com/IotSystem/v2.0.5/ws',
+      endpoint: 'wss://monitoreohidro.com/IotSystem/v1.0.1/ws',
       description: 'Al acceder a vista autenticada, wsClient.js abre la conexion WebSocket',
       payload: '-- (apertura de conexion)',
       response: 'Conexion establecida (evento open)',
@@ -142,25 +142,26 @@ export const websocketRealtime = {
     height: 320,
     nodes: [
       { id: 'hardware', type: 'box', position: { x: 0, y: 120 },
-        data: { klass: 'IOT2050 / PLC', label: 'Hardware', sub: 'publica MQTT telemetría · estado · notif.', color: '#475569', colorDark: '#334155' } },
+        data: { klass: 'IOT2050 / PLC', label: 'Hardware', sub: 'publica MQTT telemetrÃ­a Â· estado Â· notif.', color: '#475569', colorDark: '#334155' } },
       { id: 'backend', type: 'box', position: { x: 360, y: 120 },
-        data: { klass: 'Servidor', label: 'Backend', sub: 'MQTT client · procesa · WS broadcaster', color: '#475569', colorDark: '#334155' } },
+        data: { klass: 'Servidor', label: 'Backend', sub: 'MQTT client Â· procesa Â· WS broadcaster', color: '#475569', colorDark: '#334155' } },
       { id: 'frontend', type: 'box', position: { x: 720, y: 120 },
-        data: { klass: 'WS Client', label: 'Frontend', sub: 'wsClient.js · stores Pinia · UI reactiva', color: '#475569', colorDark: '#334155' } },
+        data: { klass: 'WS Client', label: 'Frontend', sub: 'wsClient.js Â· stores Pinia Â· UI reactiva', color: '#475569', colorDark: '#334155' } },
     ],
     edges: [
       { id: 'e1', source: 'hardware', sourceHandle: 'right-source', target: 'backend', targetHandle: 'left-target',
-        label: 'MQTT: telemetría · estado · notif.', type: 'smoothstep',
+        label: 'MQTT: telemetrÃ­a Â· estado Â· notif.', type: 'smoothstep',
         style: { stroke: '#64748b', strokeWidth: 1.5 }, labelStyle: { fill: '#94a3b8', fontSize: 10 },
         labelBgStyle: { fill: '#0d1117', fillOpacity: 0.9 }, labelBgPadding: [3, 6], labelBgBorderRadius: 3 },
       { id: 'e2', source: 'backend', sourceHandle: 'right-source', target: 'frontend', targetHandle: 'left-target',
-        label: 'WS push: telemetry · state · notification', animated: true, type: 'smoothstep',
+        label: 'WS push: telemetry Â· state Â· notification', animated: true, type: 'smoothstep',
         style: { stroke: '#64748b', strokeWidth: 1.5 }, labelStyle: { fill: '#94a3b8', fontSize: 10 },
         labelBgStyle: { fill: '#0d1117', fillOpacity: 0.9 }, labelBgPadding: [3, 6], labelBgBorderRadius: 3 },
       { id: 'e3', source: 'frontend', sourceHandle: 'top-source', target: 'backend', targetHandle: 'top-target',
-        label: 'wss:// · auth JWT · heartbeat 30s', type: 'smoothstep',
+        label: 'wss:// Â· auth JWT Â· heartbeat 30s', type: 'smoothstep',
         style: { stroke: '#64748b', strokeWidth: 1.5, strokeDasharray: '4,3' }, labelStyle: { fill: '#94a3b8', fontSize: 10 },
         labelBgStyle: { fill: '#0d1117', fillOpacity: 0.9 }, labelBgPadding: [3, 6], labelBgBorderRadius: 3 },
     ],
   },
 }
+

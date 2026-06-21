@@ -1,4 +1,4 @@
-export const notificationsCrud = {
+﻿export const notificationsCrud = {
   id: 'notifications-crud',
   title: 'CRUD de Notificaciones',
   module: 'Notificaciones',
@@ -7,7 +7,7 @@ export const notificationsCrud = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/notifications',
+      endpoint: '/IotSystem/v1.0.1/notifications',
       description: 'Obtener todas las notificaciones del sistema',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "notifications": [{"id": "64notif...", "title": "Temperatura alta", "message": "...", "type": "warning", "read": false, "createdAt": "2026-06-20T14:32:00Z"}]}',
@@ -16,7 +16,7 @@ export const notificationsCrud = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/notification?id={id}',
+      endpoint: '/IotSystem/v1.0.1/notification?id={id}',
       description: 'Obtener una notificacion especifica por ID',
       payload: 'URL: /notification?id=64notif789abc',
       response: 'HTTP 200\n{"success": true, "notification": {"id": "...", "title": "...", "read": false}}',
@@ -25,7 +25,7 @@ export const notificationsCrud = {
     {
       num: 3,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/notifications/status?status={bool}',
+      endpoint: '/IotSystem/v1.0.1/notifications/status?status={bool}',
       description: 'Filtrar por estado: ?status=false = no leidas, ?status=true = leidas',
       payload: 'URL: /notifications/status?status=false',
       response: 'HTTP 200\n{"success": true, "notifications": [...]}',
@@ -34,7 +34,7 @@ export const notificationsCrud = {
     {
       num: 4,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/notification',
+      endpoint: '/IotSystem/v1.0.1/notification',
       description: 'Marcar notificaciones como leidas. Emite evento WebSocket a todos los clientes. Requiere admin.',
       payload: '{"notificationIds": ["64notif789abc", "64notif012def"]}',
       response: 'HTTP 200\n{"success": true, "message": "Notificaciones marcadas como leidas"}\nWS broadcast: {"type": "notification_read", "ids": [...]}',
@@ -43,7 +43,7 @@ export const notificationsCrud = {
     {
       num: 5,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/notification',
+      endpoint: '/IotSystem/v1.0.1/notification',
       description: 'Eliminar notificaciones. Emite evento WebSocket a todos los clientes. Requiere admin.',
       payload: '{"notificationIds": ["64notif789abc"]}',
       response: 'HTTP 200\n{"success": true, "message": "Notificaciones eliminadas"}\nWS broadcast: {"type": "notification_deleted", "ids": [...]}',
@@ -61,11 +61,11 @@ export const notificationsCrud = {
       { id: 'iot', type: 'box', position: { x: 0, y: 100 },
         data: { klass: 'Dispositivo', label: 'IOT2050 / PLC', sub: 'iotsystem/notification/*', color: '#475569', colorDark: '#334155' } },
       { id: 'backend', type: 'box', position: { x: 340, y: 100 },
-        data: { klass: 'MQTT Client', label: 'Backend', sub: 'procesa · guarda MongoDB · emite WS', color: '#475569', colorDark: '#334155' } },
+        data: { klass: 'MQTT Client', label: 'Backend', sub: 'procesa Â· guarda MongoDB Â· emite WS', color: '#475569', colorDark: '#334155' } },
       { id: 'mongodb', type: 'box', position: { x: 340, y: 300 },
         data: { klass: 'Almacenamiento', label: 'MongoDB', sub: 'col. notifications', color: '#374151', colorDark: '#1f2937' } },
       { id: 'frontend', type: 'box', position: { x: 680, y: 100 },
-        data: { klass: 'WS Client', label: 'Frontend', sub: 'notificationsStore · navbar badge', color: '#475569', colorDark: '#334155' } },
+        data: { klass: 'WS Client', label: 'Frontend', sub: 'notificationsStore Â· navbar badge', color: '#475569', colorDark: '#334155' } },
     ],
     edges: [
       { id: 'e1', source: 'iot', sourceHandle: 'right-source', target: 'backend', targetHandle: 'left-target',
@@ -99,3 +99,4 @@ export const notificationsErrors = {
   notes: [],
   diagram: null,
 }
+

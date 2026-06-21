@@ -1,4 +1,4 @@
-export const actuatorsCrud = {
+﻿export const actuatorsCrud = {
   id: 'actuators-crud',
   title: 'CRUD de Actuadores',
   module: 'Actuadores',
@@ -7,7 +7,7 @@ export const actuatorsCrud = {
     {
       num: 1,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/actuators',
+      endpoint: '/IotSystem/v1.0.1/actuators',
       description: 'Obtener lista de todos los actuadores',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "actuators": [{"_id": "...", "name": "Valvula Entrada", "lifecycleState": "active", "currentState": false}]}',
@@ -16,7 +16,7 @@ export const actuatorsCrud = {
     {
       num: 2,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/actuators',
+      endpoint: '/IotSystem/v1.0.1/actuators',
       description: 'Crear actuador. El backend guarda en MongoDB y publica via MQTT (lifecycleState: pending)',
       payload: '{"name": "Valvula Entrada", "config": {"hysteresis": 0.5, "manualControl": true, "sensorControl": false, "scheduleControl": false}}',
       response: 'HTTP 202\n{"success": true, "actuator": {"_id": "64xyz...", "lifecycleState": "pending"}}',
@@ -34,7 +34,7 @@ export const actuatorsCrud = {
     {
       num: 4,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/actuator/{id}',
+      endpoint: '/IotSystem/v1.0.1/actuator/{id}',
       description: 'Obtener datos de un actuador especifico',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"actuator": {"_id": "...", "name": "...", "config": {...}, "currentState": false}}',
@@ -43,7 +43,7 @@ export const actuatorsCrud = {
     {
       num: 5,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/actuators/{id}',
+      endpoint: '/IotSystem/v1.0.1/actuators/{id}',
       description: 'Actualizar configuracion del actuador. sensorControl y scheduleControl no pueden ser true simultaneamente.',
       payload: '{"name": "Valvula Entrada Rev2", "config": {"manualControl": false, "sensorControl": true, "scheduleControl": false}}',
       response: 'HTTP 202\n{"success": true, "actuator": {...}}',
@@ -52,7 +52,7 @@ export const actuatorsCrud = {
     {
       num: 6,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/actuators/{id}',
+      endpoint: '/IotSystem/v1.0.1/actuators/{id}',
       description: 'Eliminar actuador del sistema (solo admin)',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 202\n{"success": true, "message": "Actuador eliminado exitosamente"}',
@@ -76,7 +76,7 @@ export const actuatorsGroups = {
     {
       num: 1,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups',
       description: 'Crear nuevo grupo de actuadores',
       payload: '{"name": "Valvulas Tanque Principal", "color": "#10b981"}',
       response: 'HTTP 200\n{"success": true, "group": {"_id": "64grp...", "name": "Valvulas Tanque Principal"}}',
@@ -85,7 +85,7 @@ export const actuatorsGroups = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups',
       description: 'Obtener todos los grupos',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "groups": [{"_id": "...", "name": "...", "color": "...", "actuator_ids": [...]}]}',
@@ -94,7 +94,7 @@ export const actuatorsGroups = {
     {
       num: 3,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups/{id}',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups/{id}',
       description: 'Actualizar nombre o color del grupo',
       payload: '{"name": "Valvulas Rev2", "color": "#f59e0b"}',
       response: 'HTTP 200\n{"success": true, "group": {...}}',
@@ -103,7 +103,7 @@ export const actuatorsGroups = {
     {
       num: 4,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups/{id}/associate-actuators/{actuatorId}',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups/{id}/associate-actuators/{actuatorId}',
       description: 'Vincular actuador al grupo. actuatorId va en URL path Y query param.',
       payload: 'Body: {}\nURL: .../associate-actuators/64xyz...?actuatorId=64xyz...',
       response: 'HTTP 200\n{"success": true, "message": "Actuador asociado al grupo exitosamente"}',
@@ -112,7 +112,7 @@ export const actuatorsGroups = {
     {
       num: 5,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups/{id}/dissociate-actuators/{actuatorId}',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups/{id}/dissociate-actuators/{actuatorId}',
       description: 'Desvincular actuador del grupo',
       payload: 'URL: .../dissociate-actuators/64xyz...?actuatorId=64xyz...',
       response: 'HTTP 200\n{"success": true, "message": "Actuador desasociado del grupo exitosamente"}',
@@ -121,7 +121,7 @@ export const actuatorsGroups = {
     {
       num: 6,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups/{id}?cascade=false',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups/{id}?cascade=false',
       description: 'Eliminar solo el grupo. Actuadores quedan con group_id: null.',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "message": "Grupo eliminado exitosamente"}',
@@ -130,7 +130,7 @@ export const actuatorsGroups = {
     {
       num: 7,
       method: 'DELETE',
-      endpoint: '/IotSystem/v2.0.5/actuator-groups/{id}?cascade=true',
+      endpoint: '/IotSystem/v1.0.1/actuator-groups/{id}?cascade=true',
       description: 'Eliminar grupo y todos sus actuadores de MongoDB.',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "message": "Grupo eliminado exitosamente"}',
@@ -153,7 +153,7 @@ export const actuatorsControl = {
     {
       num: 1,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/manualControl/{id}',
+      endpoint: '/IotSystem/v1.0.1/manualControl/{id}',
       description: 'Control manual: frontend envia nuevo estado. Requiere manualControl: true en config.',
       payload: '{"manualControl": true, "state": true}',
       response: 'HTTP 202\n{"success": true, "message": "Control manual enviado exitosamente"}',
@@ -171,7 +171,7 @@ export const actuatorsControl = {
     {
       num: 3,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/actuators/{id}/schedule',
+      endpoint: '/IotSystem/v1.0.1/actuators/{id}/schedule',
       description: 'Control por horario: configurar rangos HH:MM:SS. Sin solapamientos, inicio < fin.',
       payload: '{"schedule": [["08:00:00", "12:00:00"], ["14:00:00", "18:00:00"]]}',
       response: 'HTTP 202\n{"success": true, "actuator": {...}}',
@@ -180,7 +180,7 @@ export const actuatorsControl = {
     {
       num: 4,
       method: 'PUT',
-      endpoint: '/IotSystem/v2.0.5/actuators/{id}/control-sensor',
+      endpoint: '/IotSystem/v1.0.1/actuators/{id}/control-sensor',
       description: 'Control por sensor: setpoint + histeresis. Requiere rol admin.',
       payload: '{"sensorId": "64cde...", "workRange": 25.0, "hysteresis": 0.5}',
       response: 'HTTP 202\n{"success": true, "actuator": {...}}',
@@ -189,7 +189,7 @@ export const actuatorsControl = {
     {
       num: 5,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/sensor-by-actuator/{actuator_id}',
+      endpoint: '/IotSystem/v1.0.1/sensor-by-actuator/{actuator_id}',
       description: 'Obtener el sensor asociado a un actuador',
       payload: 'Authorization: Bearer {access_token}',
       response: 'HTTP 200\n{"success": true, "sensor": {"id": "...", "name": "...", "lastValue": 24.5}}',
@@ -222,3 +222,4 @@ export const actuatorsErrors = {
   notes: [],
   diagram: null,
 }
+

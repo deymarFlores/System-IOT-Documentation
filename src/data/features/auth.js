@@ -1,4 +1,4 @@
-export const authLogin = {
+﻿export const authLogin = {
   id: 'auth-login',
   title: 'Login de Usuarios',
   module: 'Autenticacion',
@@ -7,7 +7,7 @@ export const authLogin = {
     {
       num: 1,
       method: 'POST',
-      endpoint: 'https://monitoreohidro.com/IotSystem/v2.0.5/user/login',
+      endpoint: 'https://monitoreohidro.com/IotSystem/v1.0.1/user/login',
       description: 'Frontend envia formulario de login con credenciales',
       payload: 'username=usuario@email.com\n&password=MiPassword123\n&scope=remember_me',
       response: 'HTTP 200\n{"success": true, "user": {"id": "64abc...", "email": "usuario@email.com", "rol": "admin"}, "access_token": "eyJ..."}\nCookie: refresh_token=eyJ...; HttpOnly',
@@ -16,7 +16,7 @@ export const authLogin = {
     {
       num: 2,
       method: 'POST',
-      endpoint: 'https://monitoreohidro.com/IotSystem/v2.0.5/user/login',
+      endpoint: 'https://monitoreohidro.com/IotSystem/v1.0.1/user/login',
       description: 'Backend valida credenciales, genera tokens y establece cookie',
       payload: '-- (recibe el form de arriba)',
       response: 'HTTP 200\n{"success": true, "user": {...}, "access_token": "eyJ..."}\nSet-Cookie: refresh_token=eyJ...; HttpOnly; Secure; SameSite=Lax',
@@ -41,7 +41,7 @@ export const authLogout = {
     {
       num: 1,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/user/logout',
+      endpoint: '/IotSystem/v1.0.1/user/logout',
       description: 'Frontend envia peticion de logout con header Authorization',
       payload: '-- (solo header Authorization: Bearer {access_token})',
       response: 'HTTP 200\n{"success": true, "message": "Sesion cerrada exitosamente"}',
@@ -50,7 +50,7 @@ export const authLogout = {
     {
       num: 2,
       method: 'PATCH',
-      endpoint: '/IotSystem/v2.0.5/user/logout',
+      endpoint: '/IotSystem/v1.0.1/user/logout',
       description: 'Backend invalida refresh_token en MongoDB y limpia la cookie',
       payload: '-- (recibe header)',
       response: 'HTTP 200\n{"success": true}\nSet-Cookie: refresh_token=; Max-Age=0; HttpOnly',
@@ -74,7 +74,7 @@ export const sessionRestore = {
     {
       num: 1,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/user/refresh-token',
+      endpoint: '/IotSystem/v1.0.1/user/refresh-token',
       description: 'Al montar la app, authStore.checkAuth() envia la cookie de refresh_token',
       payload: '-- (cookie refresh_token enviada automaticamente)',
       response: 'HTTP 200\n{"access_token": "eyJ...nuevo..."}',
@@ -83,7 +83,7 @@ export const sessionRestore = {
     {
       num: 2,
       method: 'GET',
-      endpoint: '/IotSystem/v2.0.5/auth/me',
+      endpoint: '/IotSystem/v1.0.1/auth/me',
       description: 'Con el nuevo access_token, se obtiene el perfil del usuario',
       payload: 'Authorization: Bearer {nuevo_access_token}',
       response: 'HTTP 200\n{"user": {"id": "...", "email": "...", "rol": "..."}}',
@@ -92,7 +92,7 @@ export const sessionRestore = {
     {
       num: 3,
       method: 'POST',
-      endpoint: '/IotSystem/v2.0.5/user/refresh-token',
+      endpoint: '/IotSystem/v1.0.1/user/refresh-token',
       description: 'Interceptor Axios: al recibir 401, refresca el token y reintenta la peticion original',
       payload: '-- (cookie automatica)',
       response: 'HTTP 200\n{"access_token": "eyJ..."}\n-- reintenta peticion original',
@@ -124,3 +124,4 @@ export const authErrors = {
   notes: [],
   diagram: null,
 }
+

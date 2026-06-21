@@ -1,8 +1,8 @@
-<script setup>
+﻿<script setup>
 const systemLayers = [
   { layer: 'Frontend', protocol: 'HTTP REST + JWT', description: 'Peticiones CRUD: usuarios, sensores, actuadores, grupos, notificaciones, historial' },
-  { layer: 'Backend → Frontend', protocol: 'WebSocket (/ws)', description: 'Telemetria en tiempo real, estados de actuadores, notificaciones push' },
-  { layer: 'Backend ↔ Hardware', protocol: 'MQTT (EMQX)', description: 'Comunicacion con IOT2050 (Linux embedded) y PLC S7-1200' },
+  { layer: 'Backend â†’ Frontend', protocol: 'WebSocket (/ws)', description: 'Telemetria en tiempo real, estados de actuadores, notificaciones push' },
+  { layer: 'Backend â†” Hardware', protocol: 'MQTT (EMQX)', description: 'Comunicacion con IOT2050 (Linux embedded) y PLC S7-1200' },
 ]
 
 const cards = [
@@ -16,8 +16,8 @@ const cards = [
 <template>
   <div>
     <div class="home-hero">
-      <h1>EcoFresh — Documentacion del Sistema</h1>
-      <p>Plataforma IoT para monitoreo y control de dispositivos industriales. API v2.0.5 | monitoreohidro.com</p>
+      <h1>EcoFresh â€” Documentacion del Sistema</h1>
+      <p>Plataforma IoT para monitoreo y control de dispositivos industriales. API v1.0.1 | monitoreohidro.com</p>
     </div>
 
     <div class="cards-grid">
@@ -75,3 +75,4 @@ const cards = [
     </div>
   </div>
 </template>
+
