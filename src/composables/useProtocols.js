@@ -1,34 +1,36 @@
-import { ref, computed, isRef } from 'vue'
+import { ref, computed, isRef, watch } from 'vue'
+import { doc, onSnapshot, setDoc, deleteDoc } from 'firebase/firestore'
+import { db } from '../firebase.js'
 
-const STORAGE_KEY = 'ecofresh-protocols'
+const stateMap = ref({})
+const listeners = {}
 
-function loadAll() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') }
-  catch { return {} }
+function ensureListener(id) {
+  if (!id || listeners[id]) return
+  listeners[id] = onSnapshot(doc(db, 'protocols', id), (snap) => {
+    stateMap.value = { ...stateMap.value, [id]: snap.exists() ? snap.data() : {} }
+  })
 }
-
-const allState = ref(loadAll())
 
 export function useProtocols(featureIdInput) {
   const getId = () => isRef(featureIdInput) ? featureIdInput.value : featureIdInput
 
-  const state = computed(() => allState.value[getId()] || {})
+  ensureListener(getId())
 
-  function toggle(stepNum) {
-    const id = getId()
-    const all = { ...allState.value }
-    if (!all[id]) all[id] = {}
-    all[id] = { ...all[id], [stepNum]: !all[id][stepNum] }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
-    allState.value = all
+  if (isRef(featureIdInput)) {
+    watch(featureIdInput, (newId) => ensureListener(newId))
   }
 
-  function reset() {
+  const state = computed(() => stateMap.value[getId()] || {})
+
+  async function toggle(stepNum) {
     const id = getId()
-    const all = { ...allState.value }
-    delete all[id]
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(all))
-    allState.value = all
+    const current = stateMap.value[id] || {}
+    await setDoc(doc(db, 'protocols', id), { ...current, [stepNum]: !current[stepNum] })
+  }
+
+  async function reset() {
+    await deleteDoc(doc(db, 'protocols', getId()))
   }
 
   const completedCount = computed(() => Object.values(state.value).filter(Boolean).length)
