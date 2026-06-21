@@ -52,10 +52,7 @@ const progressPct = computed(() => {
       </ul>
     </template>
 
-    <template v-if="feature.diagram">
-      <p class="section-title">Diagrama</p>
-      <pre class="diagram-block">{{ feature.diagram }}</pre>
-    </template>
+
   </div>
 
   <div v-else class="not-found">
